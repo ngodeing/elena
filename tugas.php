@@ -41,8 +41,8 @@
                     echo "<td>" . $data['deadline'] . "</td>";
                     echo "<td>" . $data['kode_mk'] . "</td>";
                     echo "<td>
-            <a href='edit_barang.php?id_tugas=$data[id_tugas]' class='btn btn-warning btn-sm' style='font-weight: 600;'>Edit</a>|
-            <a href='delete_barang.php?id_tugas=$data[id_tugas] ' class='btn btn-danger btn-sm' style='font-weight: 600;'>Delete</a>
+            <a href='edit_tugas.php?id_tugas=$data[id_tugas]' class='btn btn-warning btn-sm' style='font-weight: 600;'>Edit</a>|
+            <a href='delete_tugas.php?id_tugas=$data[id_tugas] ' class='btn btn-danger btn-sm' style='font-weight: 600;'>Delete</a>
             </td>";
                     echo "</tr>";
                     $no++;
