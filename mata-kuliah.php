@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
+
 <body class="bg-gray-200 p-0 m-0 flex items-center justify-center flex-col">
     <?php
     require 'koneksi.php';
@@ -42,15 +44,24 @@
                 ?>
                 <div class="m-4">
                     <h2 class="text-2xl font-bold mb-3">Materi Pembelajaran</h2>
-                    <ul class="list-disc list-inside">
-                        <?php
-                        while ($data_materi = mysqli_fetch_assoc($result_materi)) {
-                            echo "<li class='mb-1'>".$data_materi['nama_materi']."</li>";
-                            echo "<li class='mb-1'>".$data_materi['file_materi']."</li>";
-                        }
-                        ?>
-                    </ul>
-                    <a href="addMateri.php?kode_mk=<?php echo $kode_mk; ?>" class="bg-blue-500 text-white px-4 py-2 rounded-md mt-3 inline-block hover:bg-blue-700 transition duration-300 ease-in-out">Tambah Materi</a>
+                    <table class="min-w-full bg-white border border-gray-300 text-center">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border">Nama Materi</th>
+                                <th class="py-2 px-4 border">File Materi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            while ($data_materi = mysqli_fetch_assoc($result_materi)) {
+                                echo "<tr>";
+                                echo "<td class='py-2 px-4 border'>" . $data_materi['nama_materi'] . "</td>";
+                                echo "<td class='py-2 px-4 border'>" . $data_materi['file_materi'] . "</td>";
+                                echo "</tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
 
                 <?php
@@ -60,13 +71,24 @@
                 ?>
                 <div class="m-4">
                     <h2 class="text-2xl font-bold mb-3">Tugas</h2>
-                    <ul class="list-disc list-inside">
-                        <?php
-                        while ($data_tugas = mysqli_fetch_assoc($result_tugas)) {
-                            echo "<li class='mb-1'>".$data_tugas['nama_tugas']."</li>";
-                        }
-                        ?>
-                    </ul>
+                    <table class="min-w-full bg-white border border-gray-300 text-center">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border">Nama Tugas</th>
+                                <th class="py-2 px-4 border">Deadline</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            while ($data_tugas = mysqli_fetch_assoc($result_tugas)) {
+                                echo "<tr>";
+                                echo "<td class='py-2 px-4 border'>" . $data_tugas['nama_tugas'] . "</td>";
+                                echo "<td class='py-2 px-4 border'>" . $data_tugas['deadline'] . "</td>";
+                                echo "</tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
 
                 <?php
@@ -76,13 +98,24 @@
                 ?>
                 <div class="m-4">
                     <h2 class="text-2xl font-bold mb-3">Quiz</h2>
-                    <ul class="list-disc list-inside">
-                        <?php
-                        while ($data_quiz = mysqli_fetch_assoc($result_quiz)) {
-                            echo "<li class='mb-1'>".$data_quiz['nama_quiz']."</li>";
-                        }
-                        ?>
-                    </ul>
+                    <table class="min-w-full bg-white border border-gray-300 text-center">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border">Nama Quiz</th>
+                                <th class="py-2 px-4 border">Deadline</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            while ($data_quiz = mysqli_fetch_assoc($result_quiz)) {
+                                echo "<tr>";
+                                echo "<td class='py-2 px-4 border'>" . $data_quiz['nama_quiz'] . "</td>";
+                                echo "<td class='py-2 px-4 border'>" . $data_quiz['deadline'] . "</td>";
+                                echo "</tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
     <?php
@@ -100,4 +133,5 @@
     }
     ?>
 </body>
+
 </html>
