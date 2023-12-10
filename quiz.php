@@ -14,7 +14,7 @@
         <center>
             <h2 class="mt-4">Daftar Quiz</h2>
         </center>
-        <a href="create_barang.php" class="btn btn-success btn-lg my-3" tabindex="-1" role="button" aria-disabled="true">Tambah Data</a>
+        <a href="create_quiz.php" class="btn btn-success btn-lg my-3" tabindex="-1" role="button" aria-disabled="true">Tambah Data</a>
         <table class="table table-hover-dark table-bordered text-center">
             <thead class="thead-dark">
                 <tr>
@@ -41,8 +41,8 @@
                     echo "<td>" . $data['deadline'] . "</td>";
                     echo "<td>" . $data['kode_mk'] . "</td>";
                     echo "<td>
-            <a href='edit_barang.php?id_quiz=$data[id_quiz]' class='btn btn-warning btn-sm' style='font-weight: 600;'>Edit</a>|
-            <a href='delete_barang.php?id_quiz=$data[id_quiz] ' class='btn btn-danger btn-sm' style='font-weight: 600;'>Delete</a>
+            <a href='edit_quiz.php?id_quiz=$data[id_quiz]' class='btn btn-warning btn-sm' style='font-weight: 600;'>Edit</a>|
+            <a href='delete_quiz.php?id_quiz=$data[id_quiz] ' class='btn btn-danger btn-sm' style='font-weight: 600;'>Delete</a>
             </td>";
                     echo "</tr>";
                     $no++;
