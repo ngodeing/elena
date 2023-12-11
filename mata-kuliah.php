@@ -97,7 +97,7 @@ $query_mtugas = "SELECT * FROM mengerjakan_tugas WHERE kode_mk = '$kode_mk'";
 $result_mtugas = mysqli_query($conn, $query_mtugas);
 ?>
 <div class="m-4">
-    <h2 class="text-2xl font-bold mb-5">Sudah Dikerjakan<a href="create_mtugas.php?kode_mk=<?php echo $kode_mk; ?>&NIM=<?php echo urlencode($NIM); ?>" class="bg-green-600 p-3 text-white rounded-lg my-5 ml-5 text-sm" tabindex="-1" role="button" aria-disabled="true">Upload Tugas</a>
+    <h2 class="text-2xl font-bold mb-5">Tugas Dikerjakan<a href="create_mtugas.php?kode_mk=<?php echo $kode_mk; ?>&NIM=<?php echo urlencode($NIM); ?>" class="bg-green-600 p-3 text-white rounded-lg my-5 ml-5 text-sm" tabindex="-1" role="button" aria-disabled="true">Upload Tugas</a>
 </h2>
     
     <table class="min-w-full bg-white border border-gray-300 text-center mt-5">
@@ -107,6 +107,7 @@ $result_mtugas = mysqli_query($conn, $query_mtugas);
                 <th class="py-2 px-4 border">File Tugas</th>
                 <th class="py-2 px-4 border">Status Tugas</th>
                 <th class="py-2 px-4 border">Nilai Tugas</th>
+                <th class="py-2 px-4 border">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -114,6 +115,7 @@ $result_mtugas = mysqli_query($conn, $query_mtugas);
             while ($data_tugas = mysqli_fetch_assoc($result_mtugas)) {
                 // Fetching nama_tugas based on id_tugas
                 $id_tugas = $data_tugas['id_tugas'];
+                $id_uptugas = $data_tugas['id_uptugas'];
                 $query_nama_tugas = "SELECT nama_tugas FROM tugas WHERE id_tugas = '$id_tugas'";
                 $result_nama_tugas = mysqli_query($conn, $query_nama_tugas);
 
@@ -129,6 +131,9 @@ $result_mtugas = mysqli_query($conn, $query_mtugas);
                 echo "<td class='py-2 px-4 border'>" . $data_tugas['file_tugas'] . "</td>";
                 echo "<td class='py-2 px-4 border'>" . $data_tugas['status_tugas'] . "</td>";
                 echo "<td class='py-2 px-4 border'>" . $data_tugas['nilai_tugas'] . "</td>";
+                echo "<td>
+                <a href='delete_mtugas.php?id_uptugas=$id_uptugas&kode_mk=" . urlencode($kode_mk) . "&NIM=" . urlencode($NIM) . "' class='btn bg-red-600 text-white p-2 text-xs m-2 rounded-lg btn-sm' style='font-weight: 600;'>Hapus</a>
+                    </td>";
                 echo "</tr>";
             }
             ?>
@@ -165,6 +170,54 @@ $result_mtugas = mysqli_query($conn, $query_mtugas);
                     </table>
                 </div>
             </div>
+
+            <?php
+// Ambil data quiz berdasarkan kode_mk
+$query_mquiz = "SELECT * FROM mengerjakan_quiz WHERE kode_mk = '$kode_mk'";
+$result_mquiz = mysqli_query($conn, $query_mquiz);
+?>
+<div class="m-4">
+    <h2 class="text-2xl font-bold mb-5">Quiz Dikerjakan<a href="create_mquiz.php?kode_mk=<?php echo $kode_mk; ?>&NIM=<?php echo urlencode($NIM); ?>" class="bg-green-600 p-3 text-white rounded-lg my-5 ml-5 text-sm" tabindex="-1" role="button" aria-disabled="true">Upload quiz</a>
+</h2>
+    
+    <table class="min-w-full bg-white border border-gray-300 text-center mt-5">
+        <thead>
+            <tr>
+                <th class="py-2 px-4 border">Nama quiz</th>
+                <th class="py-2 px-4 border">Score quiz</th>
+                <th class="py-2 px-4 border">Status quiz</th>
+                <th class="py-2 px-4 border">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+            while ($data_quiz = mysqli_fetch_assoc($result_mquiz)) {
+                // Fetching nama_quiz based on id_quiz
+                $id_quiz = $data_quiz['id_quiz'];
+                $id_upquiz = $data_quiz['id_upquiz'];
+                $query_nama_quiz = "SELECT nama_quiz FROM quiz WHERE id_quiz = '$id_quiz'";
+                $result_nama_quiz = mysqli_query($conn, $query_nama_quiz);
+
+                // Check if the query was successful
+                if ($result_nama_quiz && $row_nama_quiz = mysqli_fetch_assoc($result_nama_quiz)) {
+                    $nama_quiz = $row_nama_quiz['nama_quiz'];
+                } else {
+                    $nama_quiz = "Nama quiz Not Found";
+                }
+
+                echo "<tr>";
+                echo "<td class='py-2 px-4 border'>" . $nama_quiz . "</td>";
+                echo "<td class='py-2 px-4 border'>" . $data_quiz['skor_quiz'] . "</td>";
+                echo "<td class='py-2 px-4 border'>" . $data_quiz['status_quiz'] . "</td>";
+                echo "<td>
+                <a href='delete_mquiz.php?id_upquiz=$id_upquiz&kode_mk=" . urlencode($kode_mk) . "&NIM=" . urlencode($NIM) . "' class='btn bg-red-600 text-white p-2 text-xs m-2 rounded-lg btn-sm' style='font-weight: 600;'>Hapus</a>
+                    </td>";
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+</div>
     <?php
         } else {
             // Tampilkan pesan jika mata kuliah tidak ditemukan

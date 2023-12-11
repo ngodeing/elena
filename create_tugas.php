@@ -15,10 +15,6 @@
       <h3>Silahkan Masukkan Data</h3>
       <form action="create_tugas.php" method="post" name="form1">
         <table width="50%" border="0">
-        <tr>
-            <td>ID Tugas</td>
-            <td><input type="text" name="id_tugas" maxlength="11" required></td>
-          </tr>
           <tr>
             <td>Nama Tugas</td>
             <td><input type="text" name="nama_tugas" required></td>
@@ -71,7 +67,6 @@
 
       // Check If form submitted, insert form data into users table.
       if (isset($_POST['Submit'])) {
-        $id_tugas = $_POST['id_tugas'];
         $nama = $_POST['nama_tugas'];
         $deadline = $_POST['deadline'];
         $kode_mk = $_POST['kode_mk'];
@@ -82,7 +77,7 @@
         require 'koneksi.php';
 
         // Insert user data into table
-        $result = mysqli_query($conn, "INSERT INTO tugas(id_tugas,nama_tugas,deadline, kode_mk) VALUES('$id_tugas','$nama', '$deadline', '$kode_mk')");
+        $result = mysqli_query($conn, "INSERT INTO tugas(nama_tugas,deadline, kode_mk) VALUES('$nama', '$deadline', '$kode_mk')");
 
         // Show message when user added
         echo "Data berhasil ditambahkan  <a class='btn btn-primary' href='tugas.php'>Lihat Data</a>";

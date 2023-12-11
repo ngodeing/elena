@@ -64,7 +64,37 @@ while ($data = mysqli_fetch_array($result)) {
           </tr>
           <tr>
             <td>Kode MK</td>
-            <td><input type="text" name="kode_mk" value=<?php echo $kode_mk; ?>></td>
+            <td><select name="kode_mk">
+      <?php
+        // Sambungkan ke database dan ambil opsi dari tabel mata_kuliah
+        require 'koneksi.php';
+
+        // Periksa koneksi
+        if ($conn->connect_error) {
+          die("Koneksi gagal: " . $conn->connect_error);
+        }
+
+        // Query untuk mengambil opsi dari tabel mata_kuliah
+        $query = "SELECT kode_mk, nama_mk FROM mata_kuliah";
+        $result = $conn->query($query);
+
+        // Periksa apakah query berhasil
+        if ($result) {
+          // Tampilkan opsi dalam elemen <select>
+          while ($row = $result->fetch_assoc()) {
+            echo "<option value=\"" . $row['kode_mk'] . "\">" . $row['nama_mk'] . "</option>";
+          }
+
+          // Bebaskan hasil query
+          $result->free_result();
+        } else {
+          echo "Query error: " . $conn->error;
+        }
+
+        // Tutup koneksi
+        $conn->close();
+      ?>
+    </select></td>
           </tr>
           <tr>
             <td></td>

@@ -50,6 +50,56 @@
                 ?>
             </tbody>
         </table>
+        <center>
+        <h2 class="my-5">Pengumpulan Quiz</h2>
+        </center>
+        <table class="table table-hover-dark table-bordered text-center mb-5">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">NIM</th>
+                    <th scope="col">Nama Quiz</th>
+                    <th scope="col">Skor Quiz</th>
+                    <th scope="col">Status quiz</th>
+                    <th scope="col">Mata Kuliah</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+            require 'koneksi.php';
+            $hasil = mysqli_query($conn, "SELECT * FROM mengerjakan_quiz");
+            ?>
+
+            <?php
+            $no = 1;
+            while ($data = mysqli_fetch_array($hasil)) {
+                $id_quiz = $data['id_quiz'];
+
+                // Fetching nama_quiz based on id_quiz
+                $query_nama_quiz = "SELECT nama_quiz FROM quiz WHERE id_quiz = '$id_quiz'";
+                $result_nama_quiz = mysqli_query($conn, $query_nama_quiz);
+
+                // Check if the query was successful
+                if ($result_nama_quiz && $row_nama_quiz = mysqli_fetch_assoc($result_nama_quiz)) {
+                    $nama_quiz = $row_nama_quiz['nama_quiz'];
+                } else {
+                    $nama_quiz = "Nama quiz Not Found";
+                }
+
+                echo "<tr>";
+                echo "<th>" . $no . "</th>";
+                echo "<td>" . $data['NIM'] . "</td>";
+                echo "<td>" . $nama_quiz . "</td>";
+                echo "<td>" . $data['skor_quiz'] . "</td>";
+                echo "<td>" . $data['status_quiz'] . "</td>";
+                echo "<td>" . $data['kode_mk'] . "</td>";
+                echo "</tr>";
+                $no++;
+            }
+            ?>
+
+            </tbody>
+        </table>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>

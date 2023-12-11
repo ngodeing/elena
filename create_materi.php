@@ -15,10 +15,6 @@
       <h3>Silahkan Masukkan Data</h3>
       <form action="create_materi.php" method="post" name="form1">
         <table width="50%" border="0">
-        <tr>
-            <td>ID materi</td>
-            <td><input type="text" name="id_materi" maxlength="11" required></td>
-          </tr>
           <tr>
             <td>Nama materi</td>
             <td><input type="text" name="nama_materi" required></td>
@@ -71,7 +67,6 @@
 
       // Check If form submitted, insert form data into users table.
       if (isset($_POST['Submit'])) {
-        $id_materi = $_POST['id_materi'];
         $nama = $_POST['nama_materi'];
         $file_materi = $_POST['file_materi'];
         $kode_mk = $_POST['kode_mk'];
@@ -82,7 +77,7 @@
         require 'koneksi.php';
 
         // Insert user data into table
-        $result = mysqli_query($conn, "INSERT INTO materi_pembelajaran(id_materi,nama_materi,file_materi, kode_mk) VALUES('$id_materi','$nama', '$file_materi', '$kode_mk')");
+        $result = mysqli_query($conn, "INSERT INTO materi_pembelajaran(nama_materi,file_materi, kode_mk) VALUES('$nama', '$file_materi', '$kode_mk')");
 
         // Show message when user added
         echo "Data berhasil ditambahkan  <a class='btn btn-primary' href='materi.php'>Lihat Data</a>";

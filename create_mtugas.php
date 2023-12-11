@@ -91,9 +91,8 @@ $kode_mk = isset($_GET['kode_mk']) ? $_GET['kode_mk'] : '';
         echo "Data berhasil ditambahkan <a class='btn btn-primary' href='mata-kuliah.php?NIM=" . urlencode($NIM) . "&kode_mk=" . urlencode($kode_mk) . "'>Lihat Data</a>";
 
       }
+      echo "<br><a href='mata-kuliah.php?NIM=" . urlencode($NIM) . "&kode_mk=" . urlencode($kode_mk) . "' class='btn btn-primary btn-lg' tabindex='-1' role='button' aria-disabled='true'>Kembali</a>";
       ?>
-      <br>
-      <a href="index.php" class="btn btn-primary btn-lg " tabindex="-1" role="button" aria-disabled="true">Kembali</a>
 
     </center>
 
