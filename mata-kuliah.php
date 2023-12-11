@@ -16,7 +16,7 @@
     // Periksa apakah parameter kode_mk ada dalam URL
     if (isset($_GET['kode_mk'])) {
         $kode_mk = $_GET['kode_mk'];
-
+        $NIM = isset($_GET['NIM']) ? $_GET['NIM'] : '';
         // Ambil data mata kuliah berdasarkan kode_mk
         $query_mata_kuliah = "SELECT * FROM mata_kuliah WHERE kode_mk = '$kode_mk'";
         $result_mata_kuliah = mysqli_query($conn, $query_mata_kuliah);
@@ -90,6 +90,53 @@
                         </tbody>
                     </table>
                 </div>
+
+                <?php
+// Ambil data tugas berdasarkan kode_mk
+$query_mtugas = "SELECT * FROM mengerjakan_tugas WHERE kode_mk = '$kode_mk'";
+$result_mtugas = mysqli_query($conn, $query_mtugas);
+?>
+<div class="m-4">
+    <h2 class="text-2xl font-bold mb-5">Sudah Dikerjakan<a href="create_mtugas.php?kode_mk=<?php echo $kode_mk; ?>&NIM=<?php echo urlencode($NIM); ?>" class="bg-green-600 p-3 text-white rounded-lg my-5 ml-5 text-sm" tabindex="-1" role="button" aria-disabled="true">Upload Tugas</a>
+</h2>
+    
+    <table class="min-w-full bg-white border border-gray-300 text-center mt-5">
+        <thead>
+            <tr>
+                <th class="py-2 px-4 border">Nama Tugas</th>
+                <th class="py-2 px-4 border">File Tugas</th>
+                <th class="py-2 px-4 border">Status Tugas</th>
+                <th class="py-2 px-4 border">Nilai Tugas</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+            while ($data_tugas = mysqli_fetch_assoc($result_mtugas)) {
+                // Fetching nama_tugas based on id_tugas
+                $id_tugas = $data_tugas['id_tugas'];
+                $query_nama_tugas = "SELECT nama_tugas FROM tugas WHERE id_tugas = '$id_tugas'";
+                $result_nama_tugas = mysqli_query($conn, $query_nama_tugas);
+
+                // Check if the query was successful
+                if ($result_nama_tugas && $row_nama_tugas = mysqli_fetch_assoc($result_nama_tugas)) {
+                    $nama_tugas = $row_nama_tugas['nama_tugas'];
+                } else {
+                    $nama_tugas = "Nama Tugas Not Found";
+                }
+
+                echo "<tr>";
+                echo "<td class='py-2 px-4 border'>" . $nama_tugas . "</td>";
+                echo "<td class='py-2 px-4 border'>" . $data_tugas['file_tugas'] . "</td>";
+                echo "<td class='py-2 px-4 border'>" . $data_tugas['status_tugas'] . "</td>";
+                echo "<td class='py-2 px-4 border'>" . $data_tugas['nilai_tugas'] . "</td>";
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+</div>
+
+
 
                 <?php
                 // Ambil data quiz berdasarkan kode_mk

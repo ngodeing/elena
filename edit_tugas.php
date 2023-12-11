@@ -49,11 +49,8 @@ while ($data = mysqli_fetch_array($result)) {
     <center>
       <h3>Silahkan Masukkan Data</h3>
       <form action="edit_tugas.php" method="post" name="form1">
+      <input type="hidden" name="id_tugas" value=<?php echo $id_tugas; ?>>
         <table width="50%" border="0">
-          <tr>
-            <td>ID Tugas</td>
-            <td><input type="text" name="id_tugas" value=<?php echo $id_tugas; ?> readonly></td>
-          </tr>
           <tr>
             <td>Nama Tugas</td>
             <td><input type="text" name="nama_tugas" value=<?php echo $nama_tugas; ?>></td>
